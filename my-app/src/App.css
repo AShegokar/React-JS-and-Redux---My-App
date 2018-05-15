@@ -1,0 +1,107 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.date-section {
+  float: left;
+  width: 100%;
+  margin: 12px 0px;
+}
+.Date-range {
+  float: left;
+  width: 40%;
+}
+.Date-range > div {
+  margin: 12px 0px;
+}
+.customerDetails {
+  float: left;
+  width: 50%;
+}
+.customerDetails > div {
+  float: left;
+  width: 100%;
+  margin: 12px 0px;
+}
+.customerDetails > div label,
+.Date-range > div label {
+  width: 50%;
+  text-align: right;
+  float: left;
+}
+.customerDetails > div input,
+.customerDetails > div select {
+  width: 40%;
+  float: left;
+  margin-left: 5%;
+}
+.Data-table table {
+  display: table;
+  margin: 12px auto;
+  width: 80%;
+}
+.Data-table table,
+.Data-table table tr td,
+.Data-table table tr th {
+  border-collapse: collapse;
+  border: 1px solid #000;
+}
+.reset-filter {
+  clear: both;
+}
+.reset-filter button {
+  margin-right: 10px;
+}
+
+.wrapperRow {
+  display: table;
+  margin: 12px auto;
+  width: 80%;
+}
+.filterBtn {
+  padding: 3px 20px;
+  float: left;
+}
+.searchInput {
+  float: left;
+  margin-left: 42px;
+  padding: 3px;
+}
+.resetBtn {
+  float: left;
+  margin-left: 36px;
+  padding: 3px 20px;
+}
+.defaultBtn {
+  padding: 3px 20px;
+  margin-right: 8px;
+  float: left;
+}
