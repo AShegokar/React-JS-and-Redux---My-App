@@ -1,5 +1,9 @@
 export const initialState = {
   openfilter: false,
+  checkfilter: true,
+  applyfilter: true,
+  changeFilterText: false,
+  tableFilterData: [],
   filterDetails: {
     toRange: '',
     fromRange: '',
@@ -22,6 +26,7 @@ export const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'FILTER_CLICK':
+      // console.log(':::::::::::::59', state.openfilter)
       return {
         ...state,
         openfilter: !state.openfilter
@@ -48,21 +53,46 @@ export default (state = initialState, action) => {
           customerId: '',
           loanNumber: '',
           category: ''
-        }
+        },
+        checkfilter: true
+      }
+    case 'FITER_TYPE_SUCCESS':
+      return {
+        ...state,
+        tableFilterData: action
       }
     case 'CANCEL_CLICK':
       return {
         ...state,
         openfilter: !state.openfilter
+        // filterDetails: {
+        //   ...state.filterDetails,
+        //   toRange: '',
+        //   fromRange: '',
+
+        //   bussinessName: '',
+        //   borrowerName: '',
+        //   customerId: '',
+        //   loanNumber: '',
+        //   category: ''
+        // },
+        // checkfilter: true
+      }
+    case 'APPLY_CLICK':
+      return {
+        ...state,
+        openfilter: !state.openfilter,
+        changeFilterText: true,
+        applyfilter: true
       }
     case 'CHANGE_CLICK':
-      console.log(':::::::::::::action', action)
       return {
         ...state,
         filterDetails: {
-          ...state.filterDetails,
-          ...action.payload
-        }
+          ...state.filterDetails
+        },
+        checkfilter: action.checkfilter,
+        applyfilter: action.checkfilter
       }
     case 'RESET_SEARCH_CLICK':
       return {
@@ -70,9 +100,11 @@ export default (state = initialState, action) => {
         filterSearch: ''
       }
     case 'CHANGE_SEARCH_CLICK':
+      console.log('104', action, state)
       return {
         ...state,
-        filterSearch: action.payload
+        filterSearch: action.payload,
+        checkfilter: false
       }
     default:
       return state

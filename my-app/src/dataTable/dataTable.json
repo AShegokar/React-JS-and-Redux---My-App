@@ -1,0 +1,34 @@
+{
+  "pageOffset": 0,
+  "pageCount": 1,
+  "pageSize": 10,
+  "data": [
+    {
+      "date": 1,
+      "document": "File0.doc",
+      "lineOfBussiness": "Bussiness1",
+      "borrowerName": "Tom",
+      "category": "category",
+      "size": 125,
+      "isNew": true
+    },
+    {
+      "date": 2,
+      "document": "File1.doc",
+      "lineOfBussiness": "Bussiness2",
+      "borrowerName": "Json",
+      "category": "category1",
+      "size": 125,
+      "isNew": true
+    },
+    {
+      "date": 3,
+      "document": "File2.doc",
+      "lineOfBussiness": "Bussiness3",
+      "borrowerName": "Arnold",
+      "category": "category2",
+      "size": 125,
+      "isNew": true
+    }
+  ]
+}

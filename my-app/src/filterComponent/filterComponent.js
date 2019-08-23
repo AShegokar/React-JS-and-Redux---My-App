@@ -1,18 +1,25 @@
-import React, { Component } from 'react'
+import React from 'react'
+// import MaskedInput from 'react-maskedinput'
 
 export default function FilterComponent({
   openfilter,
+  checkfilter,
+  applyfilter,
+  changeFilterText,
   filterClickToContainer, //onFilterClick
   resetFilterClickToContainer, //onFilterReset
   cancelFilterClickToContainer, //onFilterCancel
+  applyFilterClickToContainer, // onfilterApply
   InputChangeToContainer, //inputChange
   resetFilterSearchClickToContainer, //resetFilterSearch
   RadioChangeToContainer, //RadioChange
   deleteClickToContainer, //onClickDelete
+  // getMockupData,
   selectedItem,
   filterDetails,
-  filterSearch,
-  tableItems
+  filterSearch, //() => getMockupData()
+  tableItems,
+  initActiveNotebookAndNote
 }) {
   return (
     <div className="header-section">
@@ -23,7 +30,7 @@ export default function FilterComponent({
             className="filterBtn"
             onClick={() => filterClickToContainer(openfilter)}
           >
-            Filter
+            {!changeFilterText ? 'Filter' : 'Apply Fiter'}
           </button>
           <input
             className="searchInput"
@@ -42,7 +49,7 @@ export default function FilterComponent({
           </button>
         </div>
 
-        {openfilter ? (
+        {openfilter && (
           <div className="date-section">
             <div className="Date-range">
               <h3>Date Range</h3>
@@ -53,13 +60,20 @@ export default function FilterComponent({
                   placeholder="mm/dd/yyyy"
                   value={filterDetails.toRange}
                   id="toDate"
-                  onKeyPress={event =>
-                    InputChangeToContainer(event, filterDetails)
+                  onChange={event =>
+                    InputChangeToContainer(event, filterDetails, checkfilter)
                   }
+                />
+                {/* <MaskedInput
+                  mask="11/11/1111"
+                  // name="expiry"
+                  placeholder="mm/dd/yyyy"
+                  id="toDate"
+                  value={filterDetails.toRange}
                   onChange={event =>
                     InputChangeToContainer(event, filterDetails)
                   }
-                />
+                /> */}
               </div>
               <div>
                 <label>from</label>
@@ -68,13 +82,23 @@ export default function FilterComponent({
                   placeholder="mm/dd/yyyy"
                   value={filterDetails.fromRange}
                   id="fromDate"
-                  onKeyPress={event =>
-                    InputChangeToContainer(event, filterDetails)
+                  // onKeyPress={event =>
+                  //   InputChangeToContainer(event, filterDetails, checkfilter)
+                  // }
+                  onChange={event =>
+                    InputChangeToContainer(event, filterDetails, checkfilter)
                   }
+                />
+                {/* <MaskedInput
+                  mask="11/11/1111"
+                  name="expiry"
+                  placeholder="mm/dd/yyyy"
+                  id="fromDate"
+                  value={filterDetails.fromRange}
                   onChange={event =>
                     InputChangeToContainer(event, filterDetails)
                   }
-                />
+                /> */}
               </div>
             </div>
             <div className="customerDetails">
@@ -85,7 +109,7 @@ export default function FilterComponent({
                   value={filterDetails.bussinessName}
                   id="business"
                   onChange={event =>
-                    InputChangeToContainer(event, filterDetails)
+                    InputChangeToContainer(event, filterDetails, checkfilter)
                   }
                 >
                   <option value="">Please select</option>
@@ -100,7 +124,7 @@ export default function FilterComponent({
                   type="text"
                   value={filterDetails.borrowerName}
                   onChange={event =>
-                    InputChangeToContainer(event, filterDetails)
+                    InputChangeToContainer(event, filterDetails, checkfilter)
                   }
                   id="borrower"
                 />
@@ -112,7 +136,7 @@ export default function FilterComponent({
                   value={filterDetails.customerId}
                   id="customer"
                   onChange={event =>
-                    InputChangeToContainer(event, filterDetails)
+                    InputChangeToContainer(event, filterDetails, checkfilter)
                   }
                 />
               </div>
@@ -124,7 +148,7 @@ export default function FilterComponent({
                   value={filterDetails.loanNumber}
                   id="loanNumber"
                   onChange={event =>
-                    InputChangeToContainer(event, filterDetails)
+                    InputChangeToContainer(event, filterDetails, checkfilter)
                   }
                 />
               </div>
@@ -135,7 +159,7 @@ export default function FilterComponent({
                   value={filterDetails.category}
                   id="category"
                   onChange={event =>
-                    InputChangeToContainer(event, filterDetails)
+                    InputChangeToContainer(event, filterDetails, checkfilter)
                   }
                 >
                   <option value="">Please select</option>
@@ -147,21 +171,28 @@ export default function FilterComponent({
             </div>
             <div className="reset-filter">
               <button
+                disabled={checkfilter}
                 onClick={() => resetFilterClickToContainer(filterDetails)}
               >
                 Reset Filter
               </button>
               <button
                 onClick={() =>
-                  openfilter ? cancelFilterClickToContainer(openfilter) : ''
+                  openfilter && cancelFilterClickToContainer(openfilter)
                 }
               >
                 Cancel
               </button>
+              <button
+                disabled={applyfilter}
+                onClick={event =>
+                  openfilter && applyFilterClickToContainer(event)
+                }
+              >
+                Apply
+              </button>
             </div>
           </div>
-        ) : (
-          ''
         )}
         <div className="Data-table">
           <table>
